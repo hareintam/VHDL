@@ -1,0 +1,62 @@
+--4x1 multiplekser (3x 2x1 multiplekser) 3 kirjeldusstiilis
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+ entity Mux is
+  port ( D0, D1, D2, D3     : in STD_LOGIC_VECTOR (5 downto 0);        
+         CONT_SIG : in STD_LOGIC_VECTOR (1 downto 0);
+         OUT_SIG_BEH  : out STD_LOGIC_VECTOR (5 downto 0);
+         OUT_SIG_FLOW  : out STD_LOGIC_VECTOR (5 downto 0);
+         OUT_SIG_STRUCT  : out STD_LOGIC_VECTOR (5 downto 0));
+  end Mux;
+  
+architecture RTL of Mux is
+
+--mux 2-to-1
+component mux2_1 is 
+port (a, b : in STD_LOGIC_VECTOR (5 downto 0);
+		 cont : in STD_LOGIC;
+		 o : out STD_LOGIC_VECTOR (5 downto 0));
+end component;
+
+--abisignaalid
+signal tempM1, tempM2, help_cont0, help_cont1 : STD_LOGIC_VECTOR (5 downto 0);
+signal tempD0, tempD1, tempD2, tempD3 : STD_LOGIC_VECTOR (5 downto 0);
+
+begin
+ 
+--käitumuslik kirjeldusstiil
+mux_beh: process ( D0, D1, D2, D3, CONT_SIG )
+begin
+    if CONT_SIG = "00" then
+       OUT_SIG_BEH <= D0;
+    elsif CONT_SIG = "01" then
+       OUT_SIG_BEH <= D1;
+    elsif CONT_SIG = "10" then
+       OUT_SIG_BEH <= D2;
+    elsif CONT_SIG = "11" then
+       OUT_SIG_BEH <= D3;
+    else
+       OUT_SIG_BEH <= "XXXX";
+    end if;
+end process mux_beh;
+
+-- andmevoo kirjeldusstiil
+help_cont0 <= CONT_SIG(0) & CONT_SIG(0) & CONT_SIG(0) & 
+              CONT_SIG(0) & CONT_SIG(0) & CONT_SIG(0);
+              
+help_cont1 <= CONT_SIG(1) & CONT_SIG(1) & CONT_SIG(1) & 
+              CONT_SIG(1) & CONT_SIG(1) & CONT_SIG(1);
+
+tempD0 <= (D0 and not help_cont1 and not help_cont0);
+tempD1 <= (D1 and not help_cont1 and help_cont0);
+tempD2 <= (D2 and help_cont1 and not help_cont0);
+tempD3 <= (D3 and help_cont1 and help_cont0);
+OUT_SIG_FLOW  <= tempD0 or tempD1 or tempD2 or tempD3;
+
+-- struktuurne kirjeldusstiil  
+m1: mux2_1 port map(D0, D1, CONT_SIG(0), tempM1);
+m2: mux2_1 port map(D2, D3, CONT_SIG(0), tempM2);
+m3: mux2_1 port map(tempM1, tempM1, CONT_SIG(1), OUT_SIG_STRUCT);
+
+end RTL;

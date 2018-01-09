@@ -1,0 +1,33 @@
+--clr A, B (seada sına A B-nda biti v‰‰rtuseks '0')
+--Sisend B saab omada v‰‰rtusi (xx t‰histab, et vastavate bittide v‰‰rtus meid ei huvita) xx00, xx01, xx10, xx11, mis m‰‰ravad ‰ra, mitmes bitt A-st keeratakse nulliks. 
+--N‰iteks A = 1111, B = xx10 (k¸mnendkoodis 2, ehk siis kolmas bitt), clr A, B = 1011.
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+entity func3 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0); -- 4 bitine sisend
+			b : in  STD_LOGIC_VECTOR (3 downto 0); -- 4 bitine sisend 
+			func3_out : out  STD_LOGIC_VECTOR (3 downto 0)); -- 4 bitine v‰ljund 
+end func3;
+
+architecture design of func3 is 
+begin --arhitektuuri algus
+
+--protsess, mis m‰‰rab signaali b kahe madalama j‰rgu v‰‰rtused ning vastavalt sellele keerab vajaliku biti signaalis a '0'-ks
+process(a, b) --protsess k‰ivitub signaalide a ja b muutuse peale
+begin	
+	if b(0) = '0' and b(1) = '0' then --kui signaali b v‰‰rtuseks on xx00  
+	    func3_out <= a and "1110"; -- signaali a 1. bitt keeratakse '0'-ks
+	elsif b(0) = '1' and b(1) = '0' then --kui signaali b v‰‰rtuseks on xx01
+	    func3_out <= a and "1101"; -- signaali a 2. bitt keeratakse '0'-ks
+	elsif b(0) = '0' and b(1) = '1' then --kui signaali b v‰‰rtuseks on xx10
+	    func3_out <= a and "1011"; -- signaali a 3. bitt keeratakse '0'-ks
+	elsif b(0) = '1' and b(1) = '1' then --kui signaali b v‰‰rtuseks on xx11
+	    func3_out <= a and "0111"; -- signaali a 4. bitt keeratakse '0'-ks
+	else --kui signaali b 2 madalamat j‰rku ei omanud ¸htegi eelnevatest v‰‰rtustest
+		func3_out <= "XXXX"; --v‰ljundfunktsioonile omistatakse v‰‰rtus, mis viitab veale
+	end if;
+end process;
+
+end design;

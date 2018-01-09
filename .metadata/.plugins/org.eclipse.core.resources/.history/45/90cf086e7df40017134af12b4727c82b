@@ -1,0 +1,17 @@
+--A xor B
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+entity func4 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0); -- 4 bitine sisend
+			b : in  STD_LOGIC_VECTOR (3 downto 0); -- 4 bitine sisend
+			func4_out : out  STD_LOGIC_VECTOR (3 downto 0)); -- 4 bitine väljund 
+end func4;
+
+architecture design of func4 is 
+begin --arhitektuuri algus
+
+func4_out <= a xor b; --väljundi bitt on '1', kui sisendite a ja b vastavad bitid on erineva väärtusega, ning '0' kui sama väärtusega
+
+end design;

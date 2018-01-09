@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;MUX/not.vhd&apos;" deleteContents="false" description="Delete resource &apos;MUX/not.vhd&apos;" element1="/MUX/not.vhd" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1515447996885"/>&#x0A;<refactoring comment="Delete resource &apos;MUX/or.vhd&apos;" deleteContents="false" description="Delete resource &apos;MUX/or.vhd&apos;" element1="/MUX/or.vhd" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1515448004700"/>
+</session>

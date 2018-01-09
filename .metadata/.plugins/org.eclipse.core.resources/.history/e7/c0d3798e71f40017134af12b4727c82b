@@ -1,0 +1,41 @@
+--A, B cnt 1 (1 loendamine)
+--Sisenditest A ja B ühtede loendamine. Näiteks A = 1100 ja B = 0111, siis väljund = 5.
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use ieee.numeric_std.all; --teek Integer andmetüübi kasutamiseks
+
+entity func1 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0); -- 4 bitine sisend
+			b : in  STD_LOGIC_VECTOR (3 downto 0); -- 4 bitine sisend
+			func1_out : out  STD_LOGIC_VECTOR (3 downto 0)); -- 4 bitine väljund 
+end func1;
+
+architecture design of func1 is 
+begin --arhitektuuri algus
+
+--protsess signaalidest a ja b '1'-de loendamiseks
+process(a, b) --protsess käivitub signaalide a ja b muutuse peale
+
+    variable counter: Integer; --abimuutujana loenduri deklareerimine
+    begin                                     
+       counter := 0; --londurile algväärtuse andmine
+       
+       --tsükkel signaalist a '1'-de loendamiseks
+       loop_a: for i in 0 to 3 loop
+           if( a(i) = '1') then            
+                 counter := counter + 1; --kui signaalis a kohal i on '1', siis suurendatakse loendurit 1 võrra
+           end if;
+       end loop;
+       
+       --tsükkel signaalist b '1'-de loendamiseks
+       loop_b: for i in 0 to 3 loop --tsükkel signaalist a '1'-de loendamiseks
+           if( b(i) = '1') then            
+                 counter := counter + 1; --kui signaalis b kohal i on '1', siis suurendatakse loendurit 1 võrra
+           end if;
+       end loop;
+        
+    func1_out <= std_logic_vector(to_unsigned(counter, 4)); --loenduri väärtuse teisendamine std_logic_vector tüübiks ja omistamine väljundfunktsioonile
+end process;
+
+end design;

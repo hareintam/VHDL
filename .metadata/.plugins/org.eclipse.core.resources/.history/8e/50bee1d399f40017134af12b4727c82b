@@ -1,0 +1,42 @@
+--Multipleksor, mis teostab ALU operatsiooni valikut
+-- valik toimub signaali op aluse järgnevalt:
+	--kui op on "00", siis suunatakse ALU väljundisse funktsiooni 1 väljund (A, B cnt 1)
+	--kui op on "01", siis suunatakse ALU väljundisse funktsiooni 2 väljund (ror A)
+	--kui op on "10", siis suunatakse ALU väljundisse funktsiooni 3 väljund (clr A, B)
+	--kui op on "11", siis suunatakse ALU väljundisse funktsiooni 4 väljund (A xor B)
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+--4 6-bitist, 2-bitine kontrollsignaal,  
+entity Mux is
+  port ( func1_out     : in STD_LOGIC_VECTOR (5 downto 0); -- 4 bitine sisend (funktsiooni 1 väljund)
+         func2_out     : in STD_LOGIC_VECTOR (5 downto 0); -- 4 bitine sisend (funktsiooni 2 väljund)
+         func3_out     : in STD_LOGIC_VECTOR (5 downto 0); -- 4 bitine sisend (funktsiooni 3 väljund)
+         func4_out     : in STD_LOGIC_VECTOR (5 downto 0); -- 4 bitine sisend (funktsiooni 4 väljund)
+         op : in  STD_LOGIC_VECTOR (1 downto 0); -- 2 bitine sisend (select signaal)
+         o  : out STD_LOGIC_VECTOR (3 downto 0)); -- 4 bitine väljund  
+end Mux;
+  
+architecture RTL of Mux is
+begin --arhitektuuri algus
+
+--käitumuslik kirjeldusstiil
+MUX: process ( func1_out, func2_out, func3_out, func4_out, op )
+ --protsess käivitub operatsioone teostavate komponentide väljundsignaalide muutumisel 
+ --ning operatsiooni valiku signaali op muutumisel
+  begin
+
+    if op = "00" then --kui op on "00"
+       o <= func1_out; --siis suunatakse väljundisse funktsiooni 1 väljund
+    elsif op = "01" then --kui op on "01"'
+    	o <= func2_out; --siis suunatakse väljundisse funktsiooni 2 väljund
+    elsif op = "10" then --kui op on "10"
+    	o <= func3_out; --siis suunatakse väljundisse funktsiooni 3 väljund
+    elsif op = "11" then --kui op on "11"
+    	o <= func4_out; --siis suunatakse väljundisse funktsiooni 4 väljund
+    else --kui signaal op omanud ühtegi eelnevatest väärtustest
+       o <= "XXXX"; --siis väljundfunktsioonile omistatakse väärtus, mis viitab veale
+    end if;
+end process MUX;
+
+end RTL;

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;MUX/and.vhd&apos; to &apos;mux2T1.vhd&apos;" description="Rename resource &apos;and.vhd&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="and.vhd" name="mux2T1.vhd" stamp="1515442306464" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;MUX/mux2T1.vhd&apos; to &apos;mux2_1.vhd&apos;" description="Rename resource &apos;mux2T1.vhd&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="mux2T1.vhd" name="mux2_1.vhd" stamp="1515448208533" updateReferences="true"/>
+</session>

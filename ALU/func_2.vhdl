@@ -1,0 +1,30 @@
+--rol A (ringnihe vasakule), näiteks A = 1001 -> rol (A) = 0011
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+entity func2 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			func2_out : out  STD_LOGIC_VECTOR (3 downto 0)); 
+end func2;
+
+architecture design of func2 is
+signal temp : std_logic_vector (3 downto 0);
+begin
+
+--signaali kõrgeima järgu väärtus omistatakse temp kõige madalamale järgule, teised väärtused ühe võrra kõrgemas järgus  
+process(a)
+begin                                 
+    loop_a: for i in 0 to 3 loop
+           if i = 3 then
+                 temp(0) <= a(3);
+           else 
+           		temp(i + 1) <= a(i);
+           end if;
+    end loop; 
+       
+end process;
+
+func2_out <= temp;
+
+end design;

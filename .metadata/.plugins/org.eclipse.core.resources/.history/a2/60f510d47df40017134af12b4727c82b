@@ -1,0 +1,19 @@
+--harjutustunni kodutöö loogikafunktsioon (MDNK)
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+-- 4 bitised sisend ja väljund
+entity func4 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			func4_out : out  STD_LOGIC_VECTOR (3 downto 0));
+end func4;
+
+architecture design of func4 is 
+begin
+
+func4_out <= (NOT a(0) AND a(1) AND NOT a(2) AND a(3)) OR
+             (a(0) AND NOT a(3)) OR
+             (a(0) AND NOT a(1)) OR
+             (a(2) AND NOT a(3));
+end design;

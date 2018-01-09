@@ -1,0 +1,34 @@
+--ror A (ringnihe paremale)
+--Sisendi A nihutamine ühevõrra paremale ning vasakult tuleb sisse sisendi A kõige madalam bit. Näiteks A = 1001 -> ror (A) = 1100.
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+entity func2 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0); -- 4 bitine sisend
+			func2_out : out  STD_LOGIC_VECTOR (3 downto 0)); -- 4 bitine väljund 
+end func2;
+
+architecture design of func2 is
+--abisignaali deklareerimine ja algväärtuse andmine
+signal temp : std_logic_vector (3 downto 0) := "UUUU";
+
+begin --arhitektuuri algus
+
+--protsess, mis teostab signaali a ringnihet
+process(a) --protsess käivitub signaali a muutuse peale
+begin      
+	--tsükkel signaali a väärtuste ühe koha võrra nihutamiseks kasutades abisignaali                                       
+    loop_a: for i in 0 to 3 loop
+           if i = 0 then --signaali a madalaima järgu väärtus omistatakse abisignaali kõrgeimale järgule
+                 temp(3) <= a(0);
+           else --ülejäänud signaali a väärtused omistatakse abisignaali ühe võrra madalamale järgule 
+           		temp(i - 1) <= a(i);
+           end if;
+    end loop; 
+       
+end process;
+
+func2_out <= temp; ----abisignaali väärtuse ülekandmine väljundsignaalile
+
+end design;

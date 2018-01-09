@@ -1,0 +1,36 @@
+--A cmp B (võrdlustehe), nt kui A > B väljund 0010, A < B väljund 0001, A = B väljund 0000
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use ieee.std_logic_unsigned.all;
+
+-- 4 bitised sisendid ja väljund
+entity func1 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			b : in  STD_LOGIC_VECTOR (3 downto 0);
+			func1_out : out  STD_LOGIC_VECTOR (3 downto 0)); 
+end func1;
+
+architecture design of func1 is
+signal a_sign, b_sign, out_sign: unsigned(3 downto 0); 
+begin
+
+--protsessi käivitab sisendite muutus
+process(a, b)
+begin
+-- abisignaalid väärtuste võrdlemiseks    
+a_sign <= unsigned(a);
+b_sign <= unsigned(b);
+    
+    if a_sign > b_sign then
+    out_sign <= "0010";
+    elsif a_sign = b_sign then
+    out_sign <= "0000";
+    else out_sign <= "0001";
+    end if;   
+
+--abisignaali väärtuse omistamine väljundfunktsioonile             
+    func1_out <= std_logic_vector(out_sign);
+end process;
+
+end design;

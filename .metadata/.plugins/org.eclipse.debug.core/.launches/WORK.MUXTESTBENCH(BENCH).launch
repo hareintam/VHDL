@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.zamia.plugin.SimLaunchConfigurationDelegate">
+<stringAttribute key="org.zamia.plugin.ATTR_PROJECT" value="MUX"/>
+<stringAttribute key="org.zamia.plugin.ATTR_TOPLEVEL" value="WORK.MUXTESTBENCH(BENCH)"/>
+<listAttribute key="org.zamia.plugin.ATTR_TRACES">
+<listEntry value="signal:CONTSIGTB:6:BIN:0"/>
+<listEntry value="signal:OUTSIGSTRUCT:13:BIN:0"/>
+<listEntry value="signal:OUTSIGFLOWTB:13:BIN:0"/>
+<listEntry value="signal:OUTSIGBEHTB:13:BIN:0"/>
+<listEntry value="signal:D3TB:12:BIN:0"/>
+<listEntry value="signal:D2TB:10:BIN:0"/>
+<listEntry value="signal:D1TB:8:BIN:0"/>
+<listEntry value="signal:D0TB:0:BIN:0"/>
+</listAttribute>
+</launchConfiguration>

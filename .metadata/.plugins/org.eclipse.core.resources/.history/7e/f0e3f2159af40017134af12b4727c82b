@@ -1,0 +1,60 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity ALU is
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			b : in  STD_LOGIC_VECTOR (3 downto 0);
+			op : in STD_LOGIC_VECTOR (1 downto 0);
+			o : out  STD_LOGIC_VECTOR (3 downto 0));	
+end ALU;
+
+architecture toplevel of ALU is
+
+--sisemised signaalid algväärtusega
+signal func1_out : std_logic_vector (3 downto 0) := "UUUU";
+signal func2_out : std_logic_vector (3 downto 0) := "UUUU";
+signal func3_out : std_logic_vector (3 downto 0) := "UUUU";
+signal func4_out : std_logic_vector (3 downto 0) := "UUUU";
+
+--ALU komponendid
+--funktsiooni A cmp B komponent		
+component func1 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			b : in  STD_LOGIC_VECTOR (3 downto 0);
+			func1_out : out  STD_LOGIC_VECTOR (3 downto 0));
+end component;
+--funktsiooni rol A komponent
+component func2 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			func2_out : out  STD_LOGIC_VECTOR (3 downto 0)); 
+end component;
+--funktsiooni clr A, B komponent
+component func3 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			b : in  STD_LOGIC_VECTOR (3 downto 0); 
+			func3_out : out  STD_LOGIC_VECTOR (3 downto 0));
+end component;
+--kodutöö loogikafunktsiooni komponent
+component func4 is 
+    Port ( 	a : in  STD_LOGIC_VECTOR (3 downto 0);
+			func4_out : out  STD_LOGIC_VECTOR (3 downto 0)); 
+end component;
+--MUX komponent
+component Mux is 
+    Port ( 	func1_out : in  STD_LOGIC_VECTOR (5 downto 0);
+    		func2_out : in  STD_LOGIC_VECTOR (5 downto 0);
+    		func3_out : in  STD_LOGIC_VECTOR (5 downto 0);
+    		func4_out : in  STD_LOGIC_VECTOR (5 downto 0);
+    		cntr : in  STD_LOGIC_VECTOR (1 downto 0);
+			out_sig_beh  : out STD_LOGIC_VECTOR (3 downto 0));
+end component;
+
+begin
+	--ALU komponentide port mapid
+	F1 : func1 port map (a, b, func1_out);
+	F2 : func2 port map (a, func2_out);
+	F3 : func3 port map (a, b, func3_out);
+	F4 : func4 port map (a, func4_out);
+	MUX : Mux port map (func1_out, func2_out, func3_out, func4_out, cntr, out_sig_beh);
+	
+end toplevel;

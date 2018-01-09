@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.zamia.plugin.SimLaunchConfigurationDelegate">
+<stringAttribute key="org.zamia.plugin.ATTR_PROJECT" value="ALU"/>
+<stringAttribute key="org.zamia.plugin.ATTR_TOPLEVEL" value="WORK.ALU_TB(TESTBENCH)"/>
+<listAttribute key="org.zamia.plugin.ATTR_TRACES">
+<listEntry value="signal:A_TB:15:HEX:0"/>
+<listEntry value="signal:B_TB:0:HEX:0"/>
+<listEntry value="signal:CNTR_TB:1:HEX:0"/>
+<listEntry value="signal:O_TB:2:HEX:0"/>
+</listAttribute>
+</launchConfiguration>
